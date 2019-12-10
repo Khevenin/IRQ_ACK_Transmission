@@ -1,16 +1,42 @@
 #include "libbuf.h"
 
-void bufferCopyMap(uint16_t *source, uint8_t *buf, uint8_t bufSize)
+void bufferCopyMap(uint16_t *src, uint8_t *dst, size_t srcSize, size_t dstSize)
 {
-    for (int i = 0; i < bufSize; i++)
+    if ((srcSize > 0) && (dstSize > 0))) //detect invalid size of src and dst arrays
+        {
+            if (srcSize > dstSize)
+            {
+                bufferMap(src, dst, dstSize);
+                return 1;
+            }
+            else //Source size less than Destiny size
+            {
+                bufferMap(src, dst, srcSize);
+                return 1;
+            }
+        }
+    else
     {
-        buf[i] = map(source[i], 0, 1023, 0, 255);
+        return 0;
     }
 }
 
-unsigned short bufferCopy(uint16_t *src, uint16_t *dst, size_t srcSize, size_t dstSize)
+void bufferMap(uint16_t *src, uint8_t *dst, size_t size)
 {
-    if ((srcSize > 0) && (dstSize > 0)))
+    for (size_t i = 0; i < size; i++)
+    {
+        dst[i] = tenToEight(src);
+    }
+}
+
+unsigned short tenToEightBits(uint16 *src)
+{
+    return (unsigned short)(src >> 2);
+}
+
+unsigned short bufferCopy(uint8_t *src, uint8_t *dst, size_t srcSize, size_t dstSize)
+{
+    if ((srcSize > 0) && (dstSize > 0))) //detect invalid size of src and dst arrays
         {
             if (srcSize > dstSize)
             {
@@ -29,7 +55,7 @@ unsigned short bufferCopy(uint16_t *src, uint16_t *dst, size_t srcSize, size_t d
     }
 }
 
-void copy(uint16_t *src, uint16_t *dst, size_t size)
+void copy(uint8_t *src, uint8_t *dst, size_t size)
 {
     for (size_t i = 0; i < size; i++)
     {
@@ -37,7 +63,7 @@ void copy(uint16_t *src, uint16_t *dst, size_t size)
     }
 }
 
-unsigned short bufferReset(uint8_t *buf, size_t bufSize)
+unsigned short bufferReset(uint8_t *buf, size_t size, )
 {
     if (bufSize > 0)
     {
@@ -50,9 +76,17 @@ unsigned short bufferReset(uint8_t *buf, size_t bufSize)
     }
 }
 
-void resetShort(uint8_t *buf, size_t bufSize)
+void resetShort(uint8_t *buf, size_t size)
 {
-    for (size_t i = 0; i < bufSize; i++)
+    for (size_t i = 0; i < size; i++)
+    {
+        buf[i] = 0;
+    }
+}
+
+void resetLong(uint16_t *buf, size_t size)
+{
+    for (size_t i = 0; i < size; i++)
     {
         buf[i] = 0;
     }
