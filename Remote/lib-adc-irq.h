@@ -1,7 +1,10 @@
 #include <stdio.h>
 
+#define TEMP_SENS_CHANNEL 0x08
+
 enum referenceVoltage = {
     AREF, AVCC, RESERVED, INTERNAL};
+
 enum adcPrescalerDiv = {
     DIV_2 = 2,
     DIV_4 = 4,
