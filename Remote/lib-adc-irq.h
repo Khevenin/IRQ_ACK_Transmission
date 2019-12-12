@@ -6,13 +6,13 @@ enum referenceVoltage = {
     AREF, AVCC, RESERVED, INTERNAL};
 
 enum adcPrescalerDiv = {
-    DIV_2 = 2,
-    DIV_4 = 4,
-    DIV_8 = 8,
-    DIV_16 = 16,
-    DIV_32 = 32,
-    DIV_64 = 64,
-    DIV_128 = 128};
+    DIV_2 = 0x01,
+    DIV_4 = 0x02,
+    DIV_8 = 0x03,
+    DIV_16 = 0x04,
+    DIV_32 = 0x05,
+    DIV_64 = 0x06,
+    DIV_128 = 0x07};
 enum triggerSource = {
     FREE_RUN,
     ANALOG_CMP,
@@ -28,19 +28,19 @@ triggerSource Trigg;
 adcPrescalerDiv prescalerDiv;
 
 void adcIrqSetup(uint8_t channel);
+
 void setAdcChannel(uint8_t channel);
+void setRightAdjust();
 void setAdcRefVol(referenceVoltage v);
 
 void setAdcPresaler(adcPrescalerDiv div);
-void setAutoTriggerSource(triggerSource source);
-
-void setRightAdjust();
-
-void adcEnable();
-void adcStarConversion();
-void setAutoTrigger();
-void setAdcIrqFlag();
 void setAdcIrqEnable();
+void setAdcIrqFlag();
+void setAutoTrigger();
+void adcStarConversion();
+void adcEnable();
+
+void setAutoTriggerSource(triggerSource source);
 
 unsigned int readAdc();
 unsigned short readAdcAsEight();

@@ -23,3 +23,42 @@ void setAdcRefVol(referenceVoltage v)
         ADMUX = v << 6;
     }
 }
+
+void setRightAdjust()
+{
+    ADMUX = 0 << 4;
+}
+
+void setAdcPresaler(adcPrescalerDiv div)
+{
+    ADCSRA = (div & 0x07);
+}
+
+void setAdcIrqEnable()
+{
+    ADCSRA = 1 << 3;
+}
+
+void setAdcIrqFlag()
+{
+    ADCSRA = 1 << 4;
+}
+
+void setAutoTrigger()
+{
+    ADCSRA = 1 << 5;
+}
+
+void adcStarConversion()
+{
+    ADCSRA = 1 << 6;
+}
+void adcEnable()
+{
+    ADCSRA = 1 << 7;
+}
+
+void setAutoTriggerSource(triggerSource source)
+{
+    ADCSRB = (source & 0x07);
+}
