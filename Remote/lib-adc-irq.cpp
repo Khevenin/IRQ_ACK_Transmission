@@ -1,5 +1,12 @@
 #include "lib-adc-irq.h"
 
+ISR(ADC_vect)
+{
+    //Place for User ADC read code
+    //Remember it's interrupt, so this code must be short and fast
+    //Slower operation put in main loop of program
+}
+
 /* Read 8bits output of converion from ADCL and  ADCH */
 unsigned short readAdcEight()
 {
@@ -17,6 +24,7 @@ unsigned short readAdcEight()
     }
 }
 
+/* Read full - 10bit - of output ADC conversion from ADCL and ADCH */
 unsigned int readAdcTen()
 {
     if (ADMUX & 0x20) //If Adjust to left is on -  ADLAR = 1
