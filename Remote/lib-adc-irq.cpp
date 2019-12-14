@@ -1,5 +1,22 @@
 #include "lib-adc-irq.h"
 
+/* Read 8bits output of converion from ADCL and  ADCH */
+unsigned short readAdcEight()
+{
+    if (ADMUX & 0x20) //If Adjust to left is on -  ADLAR = 1
+    {
+        unsigned short tmp = ADCH;
+        return tmp;
+    }
+    else //If Adjust to right is on - ADLAR = 0
+    {
+        unsigned int tmp = ADCL;                 //Read low value
+        tmp = ADCH << 8;                         //Read high value
+        unsigned short result = short(tmp >> 2); //Cut off two LSB
+    }
+}
+
+/* ADC conversion with interrupt init */
 void adcIrqSetup(uint8_t channel, referenceVoltage v, adcPrescalerDiv div, triggerSource source)
 {
     resetRegADMUX;
