@@ -2,6 +2,26 @@
 
 void adcIrqSetup(uint8_t channel, referenceVoltage v, adcPrescalerDiv div, triggerSource source)
 {
+    resetRegADMUX;
+    resetRegADCSRA;
+    resetRegADCSRB; //Zero bits in ADC registers
+
+    /* settigns in ADMUX reg */
+    setAdcChannel(channel); //set ADC measure channel
+    setAdcRefVol(v);        //set ADC ref. voltage
+    setRightAdjust();
+
+    /* settigns in ADCSRA reg */
+    setAdcPresaler(div);
+    setAdcIrqEnable();
+    setAutoTrigger();
+
+    /* settings in ADCSRB reg */
+    setAutoTriggerSource(source);
+
+    /* Enable ADC and conversion - set 6 and 7 bit in ADCSRA */
+    adcEnable();
+    adcStartConversion();
 }
 
 /* Function set bits and functionality in ADMUX register */
@@ -34,7 +54,7 @@ void setRightAdjust()
     ADMUX = 0 << 4;
 }
 
-/* Functions to set bit and functionality in aDCSRA register */
+/* Functions to set bit and functionality in ADCSRA register */
 void setAdcPresaler(adcPrescalerDiv div)
 {
     ADCSRA = (div & 0x07);
@@ -55,7 +75,7 @@ void setAutoTrigger()
     ADCSRA = 1 << 5;
 }
 
-void adcStarConversion()
+void adcStartConversion()
 {
     ADCSRA = 1 << 6;
 }

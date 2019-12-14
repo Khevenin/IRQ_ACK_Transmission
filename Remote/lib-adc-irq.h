@@ -43,7 +43,7 @@ void setAdcPresaler(adcPrescalerDiv div);
 void setAdcIrqEnable();
 void setAdcIrqFlag();
 void setAutoTrigger();
-void adcStarConversion();
+void adcStartConversion();
 void adcEnable();
 
 void setAutoTriggerSource(triggerSource source);
