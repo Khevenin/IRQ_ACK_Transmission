@@ -13,11 +13,28 @@ unsigned short readAdcEight()
         unsigned int tmp = ADCL;                 //Read low value
         tmp = ADCH << 8;                         //Read high value
         unsigned short result = short(tmp >> 2); //Cut off two LSB
+        return result;
+    }
+}
+
+unsigned int readAdcTen()
+{
+    if (ADMUX & 0x20) //If Adjust to left is on -  ADLAR = 1
+    {
+        unsigned int tmp = ADCL; //Read low bits
+        tmp = ADCH << 8;         //Read high bits
+        return (tmp >> 6);       //Return with removal of ADLAR = 1
+    }
+    else //If Adjust to right is on - ADLAR = 0
+    {
+        unsigned int tmp = ADCL; //Read low value
+        tmp = ADCH << 8;         //Read high value
+        return tmp;
     }
 }
 
 /* ADC conversion with interrupt init */
-void adcIrqSetup(uint8_t channel, referenceVoltage v, adcPrescalerDiv div, triggerSource source)
+void adcIrqSetup(uint8_t channel, referenceVoltage v, adcPrescalerDiv div, triggerSource source, uint8_t adjust)
 {
     resetRegADMUX;
     resetRegADCSRA;
@@ -26,7 +43,14 @@ void adcIrqSetup(uint8_t channel, referenceVoltage v, adcPrescalerDiv div, trigg
     /* settigns in ADMUX reg */
     setAdcChannel(channel); //set ADC measure channel
     setAdcRefVol(v);        //set ADC ref. voltage
-    setRightAdjust();
+    if (adjust)
+    {
+        setLefAdjust();
+    }
+    else
+    {
+        setRightAdjust();
+    }
 
     /* settigns in ADCSRA reg */
     setAdcPresaler(div);
@@ -65,10 +89,14 @@ void setAdcRefVol(referenceVoltage v)
         ADMUX = v << 6;
     }
 }
+void setLefAdjust()
+{
+    ADMUX = 1 << 5;
+}
 
 void setRightAdjust()
 {
-    ADMUX = 0 << 4;
+    ADMUX = 0 << 5;
 }
 
 /* Functions to set bit and functionality in ADCSRA register */

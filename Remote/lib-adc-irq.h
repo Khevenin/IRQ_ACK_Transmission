@@ -33,10 +33,10 @@ referenceVoltage Vref;
 triggerSource Trigg;
 adcPrescalerDiv prescalerDiv;
 
-void adcIrqSetup(uint8_t channel);
+void adcIrqSetup(uint8_t channel, referenceVoltage v, adcPrescalerDiv div, triggerSource source, uint8_t adjust);
 
 void setAdcChannel(uint8_t channel);
-//TODO create setLeftAdjust()
+void setLefAdjust();
 void setRightAdjust();
 void setAdcRefVol(referenceVoltage v);
 
@@ -53,7 +53,7 @@ void resetRegADMUX();
 void resetRegADCSRA();
 void resetRegADCSRB();
 
-unsigned int readAdcTen();     // TODO write this function
-unsigned short readAdcEight(); // TODO write this function
+unsigned int readAdcTen();
+unsigned short readAdcEight();
 
 ISR(ADC_vect);
