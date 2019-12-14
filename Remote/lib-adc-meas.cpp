@@ -10,6 +10,7 @@ unsigned short adcTab[MEASURE_SIZE];
 
 void adcMeasure(unsigned short *tab, size_t tabSize)
 {
+
 }
 
 ISR(ADC_vect)
