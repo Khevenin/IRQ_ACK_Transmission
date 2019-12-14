@@ -1,3 +1,9 @@
+/**
+ *  Library to set ADC conversin while interrupt.
+ *  For Atmega 328 -  Arduino Uno rev3 microcontroller.
+ *  @Autor: Khevenin
+ * */
+
 #include <stdio.h>
 
 #define TEMP_SENS_CHANNEL 0x08
@@ -27,7 +33,7 @@ referenceVoltage Vref;
 triggerSource Trigg;
 adcPrescalerDiv prescalerDiv;
 
-void adcIrqSetup(uint8_t channel);
+void adcIrqSetup(uint8_t channel); // TODO write body of this function
 
 void setAdcChannel(uint8_t channel);
 void setRightAdjust();
@@ -42,7 +48,11 @@ void adcEnable();
 
 void setAutoTriggerSource(triggerSource source);
 
-unsigned int readAdc();
-unsigned short readAdcAsEight();
+void resetRegADMUX();  // TODO reset register function //reset val 0x00
+void resetRegADCSRA(); // TODO rest register fucntion //reset val 0x00
+void resetRegADCSRB(); // TODO rest register fucntion //reset val 0x00
+
+unsigned int readAdc();          // TODO write this function
+unsigned short readAdcAsEight(); // TODO write this function
 
 ISR(ADC_vect);

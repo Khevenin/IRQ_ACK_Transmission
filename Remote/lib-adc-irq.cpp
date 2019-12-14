@@ -1,5 +1,10 @@
 #include "lib-adc-irq.h"
 
+void adcIrqSetup(uint8_t channel, referenceVoltage v, adcPrescalerDiv div, triggerSource source)
+{
+}
+
+/* Function set bits and functionality in ADMUX register */
 void setAdcChannel(uint8_t channel)
 {
     if (((channel < 0x00) && (channel > 0x0F)) || ((channel > 0x08) && (channel < 0x0E))) //if channel number invalid
@@ -29,6 +34,7 @@ void setRightAdjust()
     ADMUX = 0 << 4;
 }
 
+/* Functions to set bit and functionality in aDCSRA register */
 void setAdcPresaler(adcPrescalerDiv div)
 {
     ADCSRA = (div & 0x07);
@@ -58,7 +64,22 @@ void adcEnable()
     ADCSRA = 1 << 7;
 }
 
+/* Functions to set bits in ADCSRB register */
 void setAutoTriggerSource(triggerSource source)
 {
     ADCSRB = (source & 0x07);
+}
+
+/* Reset ADC registers function */
+void resetRegADMUX()
+{
+    ADMUX = 0x00;
+}
+void resetRegADCSRA()
+{
+    ADCSRA = 0x00;
+}
+void resetRegADCSRB()
+{
+    ADCSRB = 0x00;
 }
