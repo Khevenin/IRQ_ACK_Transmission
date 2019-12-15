@@ -29,7 +29,7 @@ void bufferMap(uint16_t *src, uint8_t *dst, size_t size)
     }
 }
 
-unsigned short tenToEightBits(uint16 *src)
+unsigned short tenToEightBits(uint16_t *src)
 {
     return (unsigned short)(src >> 2);
 }

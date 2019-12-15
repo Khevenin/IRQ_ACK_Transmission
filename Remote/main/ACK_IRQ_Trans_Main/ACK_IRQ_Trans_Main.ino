@@ -9,7 +9,7 @@
  * @date: 15-12-2019
  */
 
-#include "libbuf.h"
+#include "C:\Users\Khevenin\Documents\nRF24L0\IRQ_ACK_Transmission\IRQ_ACK_Transmission\Remote/libbuf.h"
 
 #define BUF_SIZE 32
 
@@ -28,15 +28,15 @@ void setup()
     Serial.print(buffer[i]);
   }
 
-    resetShort(buffer, BUF_SIZE));
-    for (size_t i = 0; i < BUF_SIZE; i++)
-    {
-      Serial.println("\nBuffer value after reset.");
-      Serial.print(buffer[i]);
-    }
+  resetShort(buffer, BUF_SIZE);
+  for (size_t i = 0; i < BUF_SIZE; i++)
+  {
+    Serial.println("\nBuffer value after reset.");
+    Serial.print(buffer[i]);
+  }
 
-    resetShort(buffer_2, BUF_SIZE);
-    bufferCopy(buffer, buffer_2, BUF_SIZE, BUF_SIZE);
+  resetShort(buffer_2, BUF_SIZE);
+  bufferCopy(buffer, buffer_2, BUF_SIZE, BUF_SIZE);
 }
 
 void loop()
