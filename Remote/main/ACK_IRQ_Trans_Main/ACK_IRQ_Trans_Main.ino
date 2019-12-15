@@ -9,14 +9,31 @@
  * @date: 15-12-2019
  */
 
-#include 
+#include "libbuf.h"
 
-void setup() {
-  // put your setup code here, to run once:
+#define BUF_SIZE 32
 
+uint8_t buffer[BUF_SIZE];
+
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println("Serial port init.");
+
+  for (size_t i = 0; i < BUF_SIZE; i++)
+  {
+    buffer[i] = i;
+    Serial.println("\nBuffer value.");
+    Serial.print(buffer[i]);
+  }
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-
+void loop()
+{
+  resetShort(buffer, BUF_SIZE));
+  for (size_t i = 0; i < BUF_SIZE; i++)
+  {
+    Serial.println("\nBuffer value after reset.");
+    Serial.print(buffer[i]);
+  }
 }
