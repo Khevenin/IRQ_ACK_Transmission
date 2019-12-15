@@ -4,14 +4,14 @@
  *  @Autor: Khevenin
  * */
 
-#include <stdio.h>
+#include <Arduino.h>
 
 #define TEMP_SENS_CHANNEL 0x08
 
-enum referenceVoltage = {
-    AREF, AVCC, RESERVED, INTERNAL};
+enum referenceVoltage {
+    AREF, AVCC, RESERVED, INTER};
 
-enum adcPrescalerDiv = {
+enum adcPrescalerDiv {
     DIV_2 = 0x01,
     DIV_4 = 0x02,
     DIV_8 = 0x03,
@@ -19,7 +19,7 @@ enum adcPrescalerDiv = {
     DIV_32 = 0x05,
     DIV_64 = 0x06,
     DIV_128 = 0x07};
-enum triggerSource = {
+enum triggerSource {
     FREE_RUN,
     ANALOG_CMP,
     EXT_IRQ_REQ_0,
@@ -29,9 +29,9 @@ enum triggerSource = {
     TIM_OVERFLOW_1,
     TIM_CAP_EVENT_1};
 
-referenceVoltage Vref;
-triggerSource Trigg;
-adcPrescalerDiv prescalerDiv;
+extern referenceVoltage Vref;
+extern triggerSource Trigg;
+extern adcPrescalerDiv prescalerDiv;
 
 void adcIrqSetup(uint8_t channel, referenceVoltage v, adcPrescalerDiv div, triggerSource source, uint8_t adjust);
 
@@ -55,5 +55,3 @@ void resetRegADCSRB();
 
 unsigned int readAdcTen();
 unsigned short readAdcEight();
-
-ISR(ADC_vect);

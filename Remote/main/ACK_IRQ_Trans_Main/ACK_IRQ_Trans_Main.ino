@@ -9,7 +9,8 @@
  * @date: 15-12-2019
  */
 
-#include "C:\Users\Khevenin\Documents\nRF24L0\IRQ_ACK_Transmission\IRQ_ACK_Transmission\Remote\main\libbuf.h"
+#include <Arduino.h>
+#include "libbuf.h"
 
 #define BUF_SIZE 32
 

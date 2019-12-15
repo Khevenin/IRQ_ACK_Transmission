@@ -6,7 +6,6 @@
 
 #include "lib-adc-meas.h"
 
-unsigned short volatile adcTab[MEASURE_SIZE];
 unsigned short volatile measureCounter = 0;
 unsigned short resetCounter = 0x08;
 
@@ -22,7 +21,7 @@ unsigned short meanVal(unsigned volatile *tab, size_t size)
 
     if (size)
     {
-        unsigned float tmp = 0;
+        unsigned long tmp = 0;
 
         size_t i;
         for (i = 0; i < size; i++)

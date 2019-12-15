@@ -2,7 +2,7 @@
 
 void bufferCopyMap(uint16_t *src, uint8_t *dst, size_t srcSize, size_t dstSize)
 {
-    if ((srcSize > 0) && (dstSize > 0))) //detect invalid size of src and dst arrays
+    if ((srcSize > 0) && (dstSize > 0)) //detect invalid size of src and dst arrays
         {
             if (srcSize > dstSize)
             {
@@ -25,18 +25,19 @@ void bufferMap(uint16_t *src, uint8_t *dst, size_t size)
 {
     for (size_t i = 0; i < size; i++)
     {
-        dst[i] = tenToEight(src);
+        dst[i] = tenToEightBits(src);
     }
 }
 
 unsigned short tenToEightBits(uint16_t *src)
 {
-    return (unsigned short)(src >> 2);
+    unsigned int tmp = (*src >> 2);
+    return (unsigned short)tmp;
 }
 
 unsigned short bufferCopy(uint8_t *src, uint8_t *dst, size_t srcSize, size_t dstSize)
 {
-    if ((srcSize > 0) && (dstSize > 0))) //detect invalid size of src and dst arrays
+    if ((srcSize > 0) && (dstSize > 0)) //detect invalid size of src and dst arrays
         {
             if (srcSize > dstSize)
             {
@@ -63,11 +64,11 @@ void copy(uint8_t *src, uint8_t *dst, size_t size)
     }
 }
 
-unsigned short bufferReset(uint8_t *buf, size_t size, )
+unsigned short bufferReset(uint8_t *buf, size_t size )
 {
-    if (bufSize > 0)
+    if (size> 0)
     {
-        resetShort(buf, bufSize);
+        resetShort(buf, size);
         return 1;
     }
     else

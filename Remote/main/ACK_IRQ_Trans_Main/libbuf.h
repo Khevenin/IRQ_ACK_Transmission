@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <Arduino.h>
 
 /* Funtion to reset arrays */
 void resetShort(uint8_t *buf, size_t size);
