@@ -11,5 +11,5 @@ void bufferMap(uint16_t *src, uint8_t *dst, size_t size);
 void bufferCopyMap(uint16_t *src, uint8_t *dst, size_t srcSize, size_t dstSize);
 
 /* Function to copy 8bits arrays */
-void copy(uint16_t *src, uint16_t *dst, size_t size);
-unsigned short bufferCopy(uint16_t *src, uint16_t *dst, size_t srcSize, size_t dstSize);
+void copy(uint8_t *src, uint8_t *dst, size_t size);
+unsigned short bufferCopy(uint8_t *src, uint8_t *dst, , size_t srcSize, size_t dstSize);

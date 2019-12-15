@@ -14,6 +14,7 @@
 #define BUF_SIZE 32
 
 uint8_t buffer[BUF_SIZE];
+uint8_t buffer_2[BUF_SIZE];
 
 void setup()
 {
@@ -26,14 +27,18 @@ void setup()
     Serial.println("\nBuffer value.");
     Serial.print(buffer[i]);
   }
+
+    resetShort(buffer, BUF_SIZE));
+    for (size_t i = 0; i < BUF_SIZE; i++)
+    {
+      Serial.println("\nBuffer value after reset.");
+      Serial.print(buffer[i]);
+    }
+
+    resetShort(buffer_2, BUF_SIZE);
+    bufferCopy(buffer, buffer_2, BUF_SIZE, BUF_SIZE);
 }
 
 void loop()
 {
-  resetShort(buffer, BUF_SIZE));
-  for (size_t i = 0; i < BUF_SIZE; i++)
-  {
-    Serial.println("\nBuffer value after reset.");
-    Serial.print(buffer[i]);
-  }
 }

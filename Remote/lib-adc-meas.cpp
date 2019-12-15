@@ -38,7 +38,3 @@ unsigned short meanVal(unsigned volatile *tab, size_t size)
         return 0;
     }
 }
-
-ISR(ADC_vect)
-{
-}
