@@ -21,8 +21,11 @@
 #define CE 7
 #define CSN 8
 
-#define TX_BUF_SIZE 32
-#define RX_BUF_SIZE 32
+#define TX_BUF_SIZE 32          //Size of TX buffer
+#define RX_BUF_SIZE 32          //Size of RX buffer
+#define ADDRESS_BUF_SIZR 5      //Size of buffer with pipeline address 
+
+const uint8_t 
 
 
 
@@ -33,12 +36,24 @@ void setup()
   Serial.begin(115200);
   Serial.println("Serial port init.");
   Serial.println("RF init start.");
+
+  /* RF config */
   Remote.begin();
-  Remote.setPALevel(RF24_PA_LOW);
-  Remote.setDataRate(RF24_250KBPS);
-  radio.setChannel(0x64);
-  radio.setRetries(4, 3);
-  radio.enableAckPayload();
+  Remote.setPALevel(RF24_PA_LOW);   //set Power Amp output power
+  Remote.setDataRate(RF24_250KBPS); //set Data Rate of speed tramission
+  Remote.setChannel(0x64);          //set Channel
+
+  Remote.setRetries(4, 3);          //set Retries of package trasmission
+  setCRCLength(RF24_CRC_8);
+
+  Remote.setAutoAck(1);
+  Remote.enableAckPayload();        //enable transmission ACK signal with Payload
+
+  Remote.printDetails();
+
+  Remote.openWritingPipe(nodeadress);
+  Remote.openReadingPipe(noade);
+  Remote.stopListening();
 
 
 }
