@@ -23,10 +23,13 @@
 
 #define TX_BUF_SIZE 32          //Size of TX buffer
 #define RX_BUF_SIZE 32          //Size of RX buffer
-#define ADDRESS_BUF_SIZR 5      //Size of buffer with pipeline address 
+#define ADDRESS_BUF_SIZE 5      //Size of buffer with pipeline address 
 
-const uint8_t 
+const uint8_t addressRX[ADDRESS_BUF_SIZE] = {'P', 'I', 'L', 'O', 'T'};
+const uint8_t addressTX[ADDRESS_BUF_SIZE] = {'S', 'L', 'A', 'V', 'E'};
 
+uint8_t bufferTX[TX_BUF_SIZE];
+uint8_t bufferRX[RX_BUF_SIZE];
 
 
 RF24 Remote(CE, CSN); //set CE, CSN pins
@@ -44,18 +47,18 @@ void setup()
   Remote.setChannel(0x64);          //set Channel
 
   Remote.setRetries(4, 3);          //set Retries of package trasmission
-  setCRCLength(RF24_CRC_8);
+  Remote.setCRCLength(RF24_CRC_8);
 
   Remote.setAutoAck(1);
   Remote.enableAckPayload();        //enable transmission ACK signal with Payload
 
   Remote.printDetails();
 
-  Remote.openWritingPipe(nodeadress);
-  Remote.openReadingPipe(noade);
-  Remote.stopListening();
+  Remote.openWritingPipe(addressTX);    //enable pipeline to transmit on TX address
+  Remote.openReadingPipe(1, addressRX); //enable pipeline to receive from RX address
+  Remote.stopListening(); 
 
-
+  resetShort(bufferRX, RX_BUF_SIZE);
 }
 
 void loop()
