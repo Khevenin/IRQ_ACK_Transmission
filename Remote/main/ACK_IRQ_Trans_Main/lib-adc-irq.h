@@ -6,20 +6,28 @@
 
 #include <Arduino.h>
 
-#define TEMP_SENS_CHANNEL 0x08
+#define TEMP_SENS_CHANNEL 0x08 //if temperature sensor is use - reference voltage must be set as 1.1V internal 
 
-enum referenceVoltage {
-    AREF, AVCC, RESERVED, INTER};
+enum referenceVoltage
+{
+    AREF,
+    AVCC,
+    RESERVED,
+    INTER
+};
 
-enum adcPrescalerDiv {
+enum adcPrescalerDiv
+{
     DIV_2 = 0x01,
     DIV_4 = 0x02,
     DIV_8 = 0x03,
     DIV_16 = 0x04,
     DIV_32 = 0x05,
     DIV_64 = 0x06,
-    DIV_128 = 0x07};
-enum triggerSource {
+    DIV_128 = 0x07
+};
+enum triggerSource
+{
     FREE_RUN,
     ANALOG_CMP,
     EXT_IRQ_REQ_0,
@@ -27,13 +35,20 @@ enum triggerSource {
     TIM0_OVERFLOW,
     TIM_CMP_B,
     TIM_OVERFLOW_1,
-    TIM_CAP_EVENT_1};
+    TIM_CAP_EVENT_1
+};
+enum adjustSelection
+{
+    RIGHT_ADJ = 0x00,
+    LEFT_ADJ = 0x01,
+};
 
 extern referenceVoltage Vref;
 extern triggerSource Trigg;
 extern adcPrescalerDiv prescalerDiv;
 
-void adcIrqSetup(uint8_t channel, referenceVoltage v, adcPrescalerDiv div, triggerSource source, uint8_t adjust);
+void adcIrqSetup(uint8_t channel, referenceVoltage v, adcPrescalerDiv div,
+                 triggerSource source, adjustSelection adjust);
 
 void setAdcChannel(uint8_t channel);
 void setLefAdjust();
